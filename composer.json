@@ -1,0 +1,21 @@
+{
+    "name": "openzipkin/zipkin-php-example",
+    "require": {
+        "monolog/monolog": "^1.23",
+        "guzzlehttp/guzzle": "^6.3",
+        "jcchavezs/zipkin": "dev-master",
+        "symfony/http-foundation": "3.4.x-dev"
+    },
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "José Carlos Chávez",
+            "email": "jcchavezs@gmail.com"
+        }
+    ],
+    "scripts": {
+        "run-frontend": "php -S 'localhost:8001' frontend.php",
+        "run-backend": "php -S 'localhost:8002' backend.php",
+        "run-zipkin": "docker run -p 9411:9411 -d openzipkin/zipkin"
+    }
+}
