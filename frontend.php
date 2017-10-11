@@ -55,6 +55,6 @@ $childSpan->finish(Timestamp\now());
 
 $span->finish(Timestamp\now());
 
-// In real life applications you might want to run this after fastcgi_finish_request()
-
-$tracer->flush();
+register_shutdown_function(function () use ($tracer) {
+    $tracer->flush();
+});

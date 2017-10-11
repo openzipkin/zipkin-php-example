@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b39566dc8900f1fae8ec76693b7a4a0e",
+    "content-hash": "131e2b2731cba8eaa71e44c5d746448b",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -77,19 +77,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "09e549f5534380c68761260a71f847644d8f65aa"
+                "reference": "e9cdab6ff93ff789b5b599326c727f51d10893a6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/09e549f5534380c68761260a71f847644d8f65aa",
-                "reference": "09e549f5534380c68761260a71f847644d8f65aa",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/e9cdab6ff93ff789b5b599326c727f51d10893a6",
+                "reference": "e9cdab6ff93ff789b5b599326c727f51d10893a6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.0"
+                "phpunit/phpunit": "^4.8.36"
             },
             "type": "library",
             "extra": {
@@ -120,7 +120,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2017-05-20 23:14:18"
+            "time": "2017-10-06 12:25:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -128,12 +128,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "811b676fbab9c99e359885032e5ebc70e442f5b8"
+                "reference": "d2537c86fa8b004c29e9b9f5e10028f0a29df101"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/811b676fbab9c99e359885032e5ebc70e442f5b8",
-                "reference": "811b676fbab9c99e359885032e5ebc70e442f5b8",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/d2537c86fa8b004c29e9b9f5e10028f0a29df101",
+                "reference": "d2537c86fa8b004c29e9b9f5e10028f0a29df101",
                 "shasum": ""
             },
             "require": {
@@ -185,7 +185,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2017-07-17 09:11:21"
+            "time": "2017-10-07 03:19:56"
         },
         {
             "name": "jcchavezs/zipkin",
@@ -193,12 +193,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jcchavezs/zipkin-php.git",
-                "reference": "31cca7d973ba6a66497af2a30511f40cce9bf57d"
+                "reference": "c074a4d446852e8eb685d47aad2595031581f077"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jcchavezs/zipkin-php/zipball/31cca7d973ba6a66497af2a30511f40cce9bf57d",
-                "reference": "31cca7d973ba6a66497af2a30511f40cce9bf57d",
+                "url": "https://api.github.com/repos/jcchavezs/zipkin-php/zipball/c074a4d446852e8eb685d47aad2595031581f077",
+                "reference": "c074a4d446852e8eb685d47aad2595031581f077",
                 "shasum": ""
             },
             "require": {
@@ -217,7 +217,8 @@
                 },
                 "files": [
                     "./src/Zipkin/Timestamp.php",
-                    "./src/Zipkin/Kind.php"
+                    "./src/Zipkin/Kind.php",
+                    "./src/Zipkin/Tags.php"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -231,7 +232,7 @@
                 }
             ],
             "description": "A Zipkin instrumentation for PHP",
-            "time": "2017-09-22 13:31:40"
+            "time": "2017-10-03 09:55:11"
         },
         {
             "name": "monolog/monolog",
@@ -414,12 +415,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "fb5f7ade67d27cf480e0d4d5c7e97267feb29035"
+                "reference": "0fe9b3dc9902a89e646ca5bf053690018830999b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/fb5f7ade67d27cf480e0d4d5c7e97267feb29035",
-                "reference": "fb5f7ade67d27cf480e0d4d5c7e97267feb29035",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/0fe9b3dc9902a89e646ca5bf053690018830999b",
+                "reference": "0fe9b3dc9902a89e646ca5bf053690018830999b",
                 "shasum": ""
             },
             "require": {
@@ -459,7 +460,7 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2017-09-15 17:11:35"
+            "time": "2017-10-10 10:38:39"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -467,12 +468,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803"
+                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
                 "shasum": ""
             },
             "require": {
@@ -484,7 +485,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -518,7 +519,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14 15:44:48"
+            "time": "2017-10-11 12:05:26"
         }
     ],
     "packages-dev": [],

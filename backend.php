@@ -30,7 +30,7 @@ $carrier = array_map(function ($header) {
 }, $request->headers->all());
 
 $extractor = $tracing->getPropagation()->getExtractor(new \Zipkin\Propagation\Map());
-$traceContext = $extractor($carrier);
+$traceContext = $extractor(new ArrayObject($carrier));
 
 $tracer = $tracing->getTracer();
 $span = $tracer->newChild($traceContext);
@@ -44,4 +44,6 @@ $span->annotate(Annotation::SERVER_SEND, Timestamp\now());
 
 $span->finish(Timestamp\now());
 
-$tracer->flush();
+register_shutdown_function(function () use ($tracer) {
+    $tracer->flush();
+});

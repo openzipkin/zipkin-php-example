@@ -7,6 +7,8 @@ Zipkin, a distributed tracing system.
 This allows you to see the how long the whole operation took, as 
 well how much time was spent in each service.
 
+This example uses the [jcchavezs/zipkin](https://github.com/jcchavezs/zipkin-php) library.
+
 <img width="972" alt="zipkin screen shot" src="./screenshot.png">
 
 ## Requirements
