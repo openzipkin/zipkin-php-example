@@ -1,59 +1,48 @@
 <?php
 
 use GuzzleHttp\Client;
-use Zipkin\Annotation;
-use Zipkin\Endpoint;
 use Zipkin\Propagation\DefaultSamplingFlags;
 use Zipkin\Propagation\Map;
-use Zipkin\Samplers\BinarySampler;
 use Zipkin\Timestamp;
-use Zipkin\TracingBuilder;
 
 require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/functions.php';
 
-$endpoint = Endpoint::create('frontend', '127.0.0.2', null, 2555);
-$client = new Client();
-
-$logger = new \Monolog\Logger('log');
-$logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
-
-$reporter = new Zipkin\Reporters\HttpLogging($client, $logger);
-$sampler = BinarySampler::createAsAlwaysSample();
-$tracing = TracingBuilder::create()
-    ->havingLocalEndpoint($endpoint)
-    ->havingSampler($sampler)
-    ->havingReporter($reporter)
-    ->build();
+$tracing = create_tracing('frontend', '127.0.0.1');
 
 $tracer = $tracing->getTracer();
 
+/* Always sample traces */
 $defaultSamplingFlags = DefaultSamplingFlags::createAsSampled();
+
+/* Creates the main span */
 $span = $tracer->newTrace($defaultSamplingFlags);
 $span->start(Timestamp\now());
 $span->setName('http_request');
-$span->annotate(Annotation::SERVER_RECEIVE, Timestamp\now());
 
 usleep(100 * mt_rand(1, 3));
 
+/* Creates the span for getting the users list */
 $childSpan = $tracer->newChild($span->getContext());
 $childSpan->start();
 $childSpan->setName('users:get_list');
 
-$headers = new ArrayObject();
+$headers = [];
 
+/* Injects the context into the wire */
 $injector = $tracing->getPropagation()->getInjector(new Map());
 $injector($childSpan->getContext(), $headers);
 
-$childSpan->annotate(Annotation::CLIENT_START, Timestamp\now());
-
-$request = new \GuzzleHttp\Psr7\Request('POST', 'localhost:8002', (array) $headers);
-$response = $client->send($request);
-
-$childSpan->annotate(Annotation::CLIENT_RECEIVE, Timestamp\now());
+/* HTTP Request to the backend */
+$httpClient = new Client();
+$request = new \GuzzleHttp\Psr7\Request('POST', 'localhost:9000', $headers);
+$response = $httpClient->send($request);
 
 $childSpan->finish(Timestamp\now());
 
 $span->finish(Timestamp\now());
+
+/* Sends the trace to zipkin once the response is served */
 
 register_shutdown_function(function () use ($tracer) {
     $tracer->flush();

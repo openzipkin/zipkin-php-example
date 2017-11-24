@@ -14,8 +14,8 @@
         }
     ],
     "scripts": {
-        "run-frontend": "php -S 'localhost:8001' frontend.php",
-        "run-backend": "php -S 'localhost:8002' backend.php",
+        "run-frontend": "php -S 'localhost:8081' frontend.php",
+        "run-backend": "php -S 'localhost:9000' backend.php",
         "run-zipkin": "docker run -p 9411:9411 -d openzipkin/zipkin"
     }
 }
