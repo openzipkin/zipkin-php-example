@@ -3,21 +3,28 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:5.6-cli
+      # node-browsers come with java pre-installed
+      - image: circleci/php:5.6-node-browsers
     working_directory: ~/openzipkin
     steps:
       - checkout
       - run: sudo composer self-update
       - run: composer install -n --prefer-dist
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run: |
-          docker run -d --name zipkin -p 9411:9411 openzipkin/zipkin
-          docker exec zipkin curl -s --retry 10 --retry-delay 5 --retry-connrefused http://127.0.0.1:9411/health
+          # install wget as it can retry on failure
+          sudo apt-get -y -qq install wget
+          # easy zipkin download is broke https://github.com/openzipkin/zipkin/issues/1804
+          wget -O zipkin.jar "$(curl -D- -s 'https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec' | grep '^Location: ' | cut -f2 -d' ' | tr -d $'\r' | sed 's/repo2/repo1/')"
       - run:
           background: true
-          command: composer run-frontend
+          command: java -jar zipkin.jar
+      # block until zipkin is available
+      - run: wget --retry-connrefused -T 60 http://127.0.0.1:9411/health
+      # start both processes in the background, but don't use composer as it dies
       - run:
           background: true
-          command: composer run-backend
+          command: php -S '127.0.0.1:8081' frontend.php
+      - run:
+          background: true
+          command: php -S '127.0.0.1:9000' frontend.php
       - run: bash test.sh

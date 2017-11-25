@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
-/sbin/ip route|awk '/default/ { print $3 }'
+curl 127.0.0.1:8081
 
-curl 0.0.0.0:8081
-
+# async send to zipkin, so wait a bit before reading back
 sleep 1
 
 EXPECTED_SPANS=3
-ACTUAL_SPANS=$(curl -s http://localhost:9411/zipkin/api/v1/traces | jq '.[0] | length')
+ACTUAL_SPANS=$(curl -s 127.0.0.1:9411/api/v2/traces | jq '.[0] | length')
 
 if [ $ACTUAL_SPANS -eq $EXPECTED_SPANS ];
 then
