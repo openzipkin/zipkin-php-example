@@ -16,5 +16,5 @@ jobs:
       - setup_remote_docker:
           docker_layer_caching: true
       - run: |
-          sudo docker run -d --name zipkin -p 9411:9411 openzipkin/zipkin
-          sudo docker exec zipkin curl -s --retry 10 --retry-delay 5 --retry-connrefused http://127.0.0.1:9411/health
+          docker run -d --name zipkin -p 9411:9411 openzipkin/zipkin
+          docker exec zipkin curl -s --retry 10 --retry-delay 5 --retry-connrefused http://127.0.0.1:9411/health
