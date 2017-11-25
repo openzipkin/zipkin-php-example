@@ -3,15 +3,11 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-node-browsers
+      - image: circleci/php:5.6-cli
     working_directory: ~/openzipkin
     steps:
       - checkout
       - run: sudo composer self-update
-      - restore_cache:
-          keys:
-            - composer-v1-{{ checksum "composer.json" }}
-            - composer-v1-
       - run: composer install -n --prefer-dist
       - setup_remote_docker:
           docker_layer_caching: true

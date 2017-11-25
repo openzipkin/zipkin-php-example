@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-curl localhost:8081
+/sbin/ip route|awk '/default/ { print $3 }'
+
+curl 0.0.0.0:8081
 
 sleep 1
 
