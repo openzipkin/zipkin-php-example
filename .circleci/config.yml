@@ -13,3 +13,15 @@ jobs:
             - composer-v1-{{ checksum "composer.json" }}
             - composer-v1-
       - run: composer install -n --prefer-dist
+      - setup_remote_docker:
+          docker_layer_caching: true
+      - run: |
+          docker run -d --name zipkin -p 9411:9411 openzipkin/zipkin
+          docker exec zipkin curl -s --retry 10 --retry-delay 5 --retry-connrefused http://127.0.0.1:9411/health
+      - run:
+          background: true
+          command: composer run-frontend
+      - run:
+          background: true
+          command: composer run-backend
+      - run: bash test.sh
