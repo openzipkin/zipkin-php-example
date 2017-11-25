@@ -27,8 +27,9 @@ jobs:
       - run:
           background: true
           command: php -S '127.0.0.1:9000' frontend.php
+      # hit the frontend which calls the backend
+      - run: curl -v --max-time 5 127.0.0.1:8081
       - run: |
-          curl 127.0.0.1:8081
           # async send to zipkin, so wait a bit before reading back
           sleep 1
           test $(curl -s 127.0.0.1:9411/api/v2/traces | jq '.[0] | length') -eq 3
