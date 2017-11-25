@@ -9,6 +9,7 @@ ACTUAL_SPANS=$(curl -s http://localhost:9411/zipkin/api/v1/traces | jq '.[0] | l
 
 if [ $ACTUAL_SPANS -eq $EXPECTED_SPANS ];
 then
+    echo "${EXPECTED_SPANS} spans expected, got ${ACTUAL_SPANS}"
     exit 0
 else
     echo "${EXPECTED_SPANS} spans expected, got ${ACTUAL_SPANS}"

@@ -20,10 +20,11 @@ This example uses the [jcchavezs/zipkin](https://github.com/jcchavezs/zipkin-php
 This example has two services: frontend and backend. They both report 
 trace data to zipkin.
 
-To setup the demo, run 
+To setup the demo, do
 
 ```bash
-composer install
+// As of zipkin php is still in 1.0.0-betaX
+rm composer.lock && composer install
 ```
 
 Once the dependencies are installed, run the services:

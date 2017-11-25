@@ -10,6 +10,7 @@ function create_tracing($endpointName, $ipv4)
     $endpoint = Endpoint::create($endpointName, $ipv4, null, 2555);
     $httpClient = new Client();
 
+    /* Do not copy this logger into production. Read https://github.com/Seldaek/monolog/blob/master/doc/01-usage.md#log-levels */
     $logger = new \Monolog\Logger('log');
     $logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
 
