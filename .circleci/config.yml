@@ -13,3 +13,6 @@ jobs:
             - composer-v1-{{ checksum "composer.json" }}
             - composer-v1-
       - run: composer install -n --prefer-dist
+      - run: |
+          docker run -d --name zipkin -p 9411:9411 openzipkin/zipkin
+          curl --retry 10 --retry-connrefused http://localhost:9411
