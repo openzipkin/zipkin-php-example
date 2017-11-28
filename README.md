@@ -20,10 +20,11 @@ This example uses the [jcchavezs/zipkin](https://github.com/jcchavezs/zipkin-php
 This example has two services: frontend and backend. They both report 
 trace data to zipkin.
 
-To setup the demo, run 
+To setup the demo, do
 
 ```bash
-composer install
+// As of zipkin php is still in 1.0.0-betaX
+rm composer.lock && composer install
 ```
 
 Once the dependencies are installed, run the services:
@@ -43,9 +44,9 @@ composer run-backend
 And then, request the frontend:
  
 ```
-curl http://localhost:8001
+curl http://localhost:8081
 ```
 
-1. This starts a trace in the frontend (http://localhost:8001/)
-2. Continues the trace and calls the backend (http://localhost:8002)
+1. This starts a trace in the frontend (http://localhost:8081/)
+2. Continues the trace and calls the backend (http://localhost:9000)
 3. Next, you can view traces that went through the backend via http://localhost:9411/?serviceName=frontend.
