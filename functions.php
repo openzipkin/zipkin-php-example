@@ -23,4 +23,3 @@ function create_tracing($endpointName, $ipv4)
         ->build();
     return $tracing;
 }
-
