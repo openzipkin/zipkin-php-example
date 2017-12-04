@@ -10,11 +10,7 @@ jobs:
       - checkout
       - run: sudo composer self-update
       - run: composer install -n --prefer-dist
-      - run: |
-          # install wget as it can retry on failure
-          sudo apt-get -y -qq install wget
-          # easy zipkin download is broke https://github.com/openzipkin/zipkin/issues/1804
-          wget -O zipkin.jar "$(curl -D- -s 'https://search.maven.org/remote_content?g=io.zipkin.java&a=zipkin-server&v=LATEST&c=exec' | grep '^Location: ' | cut -f2 -d' ' | tr -d $'\r' | sed 's/repo2/repo1/')"
+      - run: curl -sSL https://zipkin.io/quickstart.sh | bash -s
       - run:
           background: true
           command: java -jar zipkin.jar
