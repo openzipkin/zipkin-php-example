@@ -1,5 +1,7 @@
 # Zipkin PHP example
 
+[![CircleCI](https://circleci.com/gh/openzipkin/zipkin-php-example/tree/master.svg?style=svg)](https://circleci.com/gh/openzipkin/zipkin-php-example/tree/master)
+
 This is an example app where two php services collaborate on an 
 http request. Notably, timing of these requests are recorded into
 Zipkin, a distributed tracing system.
