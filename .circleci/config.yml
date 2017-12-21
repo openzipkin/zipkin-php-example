@@ -8,7 +8,13 @@ jobs:
     working_directory: ~/openzipkin
     steps:
       - checkout
-      - run: sudo composer self-update
+      - run:
+          name: Install Composer
+          command: |
+            php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+            php -r "if (hash_file('SHA384', 'composer-setup.php') === trim(file_get_contents('https://composer.github.io/installer.sig'))) { echo 'Installer verified'; } else { echo 'Installer invalid'; unlink('composer-setup.php'); } echo PHP_EOL;"
+            php composer-setup.php
+            php -r "unlink('composer-setup.php');"
       - run: composer install -n --prefer-dist
       - run: curl -sSL https://zipkin.io/quickstart.sh | bash -s
       - run:
@@ -26,7 +32,7 @@ jobs:
       # hit the frontend which calls the backend
       - run: wget -v --retry-connrefused -T 5 -O /dev/null 127.0.0.1:8081
       - run: |
-          # async send to zipkin, so wait a bit before reading back
+          # wait just in case
           sleep 1
           test $(curl -s 127.0.0.1:9411/api/v2/traces | jq '.[0] | length') -eq 3
 
