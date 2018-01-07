@@ -36,19 +36,19 @@ jobs:
           sleep 1
           test $(curl -s 127.0.0.1:9411/api/v2/traces | jq '.[0] | length') -eq 3
 
-workflows:
-  version: 2
-  commit:
-    jobs:
-      - build
-  nightly:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
-                - beta
-    jobs:
-      - build
+#workflows:
+#  version: 2
+#  commit:
+#    jobs:
+#      - build
+#  nightly:
+#    triggers:
+#      - schedule:
+#          cron: "0 0 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
+#                - beta
+#    jobs:
+#      - build
