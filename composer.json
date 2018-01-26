@@ -3,7 +3,7 @@
     "require": {
         "monolog/monolog": "^1.23",
         "guzzlehttp/guzzle": "^6.3",
-        "jcchavezs/zipkin": "dev-master",
+        "jcchavezs/zipkin": "~1.0.1",
         "symfony/http-foundation": "3.4.x-dev"
     },
     "minimum-stability": "dev",
