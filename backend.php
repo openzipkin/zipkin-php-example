@@ -16,17 +16,25 @@ $carrier = array_map(function ($header) {
 
 /* Extracts the context from the HTTP headers */
 $extractor = $tracing->getPropagation()->getExtractor(new Map());
-$traceContext = $extractor($carrier);
+$extractedContext = $extractor($carrier);
 
 /* Get users from DB */
 $tracer = $tracing->getTracer();
-$span = $tracer->newChild($traceContext);
+$span = $tracer->nextSpan($extractedContext);
 $span->start();
-$span->setName('user:get_list:mysql_query');
+$span->setKind(Zipkin\Kind\SERVER);
+$span->setName('parse_request');
 
-usleep(100);
+$childSpan = $tracer->newChild($span->getContext());
+$childSpan->start();
+$childSpan->setKind(Zipkin\Kind\CLIENT);
+$childSpan->setName('user:get_list:mysql_query');
 
-$span->finish(Timestamp\now());
+usleep(50000);
+
+$childSpan->finish();
+
+$span->finish();
 
 /* Sends the trace to zipkin once the response is served */
 register_shutdown_function(function () use ($tracer) {
