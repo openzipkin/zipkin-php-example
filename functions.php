@@ -15,7 +15,7 @@ function create_tracing($endpointName, $ipv4)
     $logger = new \Monolog\Logger('log');
     $logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
 
-    $reporter = new Zipkin\Reporters\Http(\Zipkin\Reporters\Http\CurlFactory::create());
+    $reporter = new ZipkinReporterKafka\Reporter();
     $sampler = BinarySampler::createAsAlwaysSample();
     $tracing = TracingBuilder::create()
         ->havingLocalEndpoint($endpoint)

@@ -17,6 +17,16 @@ jobs:
             php -r "unlink('composer-setup.php');"
       - run: composer install -n --prefer-dist
       - run: curl -sSL https://zipkin.io/quickstart.sh | bash -s
+
+      # install kafka
+      - run: curl -SL http://archive.apache.org/dist/kafka/0.8.2.2/kafka_2.11-0.8.2.2.tgz | tar xz
+      - run:
+          background: true
+          command: bash -c "cd kafka_* && bin/zookeeper-server-start.sh config/zookeeper.properties >/dev/null 2>&1 &"
+      - run:
+          background: true
+          command: bash -c "cd kafka_* && bin/kafka-server-start.sh config/server.properties >/dev/null 2>&1 &"
+      # run zipkin
       - run:
           background: true
           command: java -jar zipkin.jar

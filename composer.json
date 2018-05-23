@@ -3,8 +3,9 @@
     "require": {
         "monolog/monolog": "^1.23",
         "guzzlehttp/guzzle": "^6.3",
-        "jcchavezs/zipkin": "dev-master",
-        "symfony/http-foundation": "3.4.x-dev"
+        "jcchavezs/zipkin": "~1.2.2",
+        "symfony/http-foundation": "3.4.x-dev",
+        "jcchavezs/zipkin-reporter-kafka": "dev-master"
     },
     "minimum-stability": "dev",
     "authors": [
@@ -16,6 +17,6 @@
     "scripts": {
         "run-frontend": "php -S '127.0.0.1:8081' frontend.php",
         "run-backend": "php -S '127.0.0.1:9000' backend.php",
-        "run-zipkin": "docker run -p 9411:9411 -d openzipkin/zipkin"
+        "run-zipkin": "DOCKER_KAFKA_HOST=$(ipconfig getifaddr en0) docker-compose up -d"
     }
 }

@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  kafka-zookeeper:
+    image: openzipkin/zipkin-kafka
+    container_name: kafka-zookeeper
+    environment:
+      - KAFKA_ADVERTISED_HOST_NAME=${DOCKER_KAFKA_HOST}
+      - KAFKA_ADVERTISED_PORT=9092
+    ports:
+      - 2181:2181
+      - 9092:9092
+
+  zipkin:
+    image: openzipkin/zipkin
+    container_name: zipkin
+    environment:
+      - KAFKA_BOOTSTRAP_SERVERS=kafka-zookeeper:9092
+      - JAVA_OPTS=-Dlogging.level.zipkin=DEBUG -Dlogging.level.zipkin2=DEBUG
+    ports:
+      - 9411:9411
+    depends_on:
+      - kafka-zookeeper
