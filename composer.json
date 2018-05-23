@@ -3,10 +3,10 @@
     "require": {
         "monolog/monolog": "^1.23",
         "guzzlehttp/guzzle": "^6.3",
-        "jcchavezs/zipkin": "~1.0.1",
+        "jcchavezs/zipkin": "^1.2.2",
         "symfony/http-foundation": "3.4.x-dev"
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "authors": [
         {
             "name": "José Carlos Chávez",
