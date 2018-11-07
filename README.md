@@ -9,8 +9,6 @@ Zipkin, a distributed tracing system.
 This allows you to see the how long the whole operation took, as 
 well how much time was spent in each service.
 
-This example uses the [jcchavezs/zipkin](https://github.com/jcchavezs/zipkin-php) library.
-
 <img width="972" alt="zipkin screen shot" src="./screenshot.png">
 
 ## Requirements
@@ -25,8 +23,7 @@ trace data to zipkin.
 To setup the demo, do
 
 ```bash
-// As of zipkin php is still in 1.0.0-betaX
-rm composer.lock && composer install
+composer install
 ```
 
 Once the dependencies are installed, run the services:
