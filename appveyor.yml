@@ -1,5 +1,3 @@
-# Highly inspired in https://blog.wyrihaximus.net/2016/11/running-php-unit-tests-on-windows-using-appveyor-and-chocolatey/
-
 build: false
 platform:
   - x64
