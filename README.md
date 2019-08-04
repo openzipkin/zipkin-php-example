@@ -51,7 +51,7 @@ curl http://localhost:8081
 3. Next, you can view traces that went through the backend via http://localhost:9411/?serviceName=frontend.
 
 
-## Running example with a non-docker zipkin:
+## Running example with a custom zipkin location:
 
 If you need to pass the zipkin endpoint, just pass the reporter
 url as `HTTP_REPORTER_URL` env variable.
