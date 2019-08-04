@@ -11,11 +11,8 @@ environment:
   - php_ver_target: 7.2
   - php_ver_target: 7.3
 
-cache:
-#    - '%LOCALAPPDATA%\Composer\files -> composer.lock'
-    - composer.phar
-
 init:
+    - SET PATH=c:\tools\php;%PATH%
     - SET COMPOSER_NO_INTERACTION=1
 
 ## Install PHP and composer, and run the appropriate composer command
@@ -24,9 +21,10 @@ install:
     - ps: .\Install-PHP.ps1 -Version $Env:php_ver_target -Highest -Arch x64 -Extensions mbstring,intl,openssl,curl
     - rm .\Install-PHP.ps1
     - refreshenv
+    - cd c:\tools\php
     - php -r "readfile('https://getcomposer.org/installer');" | php
     - cd c:\projects\zipkin-php-example
-    - composer.phar install --no-progress --profile
+    - composer install --no-progress --profile
 
 ## Run the actual test
 test_script:
