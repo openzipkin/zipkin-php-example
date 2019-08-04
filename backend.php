@@ -1,6 +1,5 @@
 <?php
 
-use Zipkin\Timestamp;
 use Zipkin\Propagation\Map;
 
 require_once __DIR__ . '/vendor/autoload.php';

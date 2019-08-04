@@ -49,3 +49,19 @@ curl http://localhost:8081
 1. This starts a trace in the frontend (http://localhost:8081/)
 2. Continues the trace and calls the backend (http://localhost:9000)
 3. Next, you can view traces that went through the backend via http://localhost:9411/?serviceName=frontend.
+
+
+## Running example with a custom zipkin location:
+
+If you need to pass the zipkin endpoint, just pass the reporter
+url as `HTTP_REPORTER_URL` env variable.
+
+```bash
+
+# In terminal 1:
+HTTP_REPORTER_URL=http://myzipkin:9411/api/v2/span composer run-frontend
+
+# In terminal 2
+HTTP_REPORTER_URL=http://myzipkin:9411/api/v2/span composer run-backend
+
+```
