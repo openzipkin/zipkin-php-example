@@ -16,7 +16,7 @@ jobs:
             php composer-setup.php
             php -r "unlink('composer-setup.php');"
       - run: composer install -n --prefer-dist
-      - run: curl -sSL https://zipkin.apache.org/quickstart.sh | bash -s
+      - run: curl -sSL https://zipkin.io/quickstart.sh | bash -s
       - run:
           background: true
           command: java -jar zipkin.jar
