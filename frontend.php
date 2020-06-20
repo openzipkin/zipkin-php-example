@@ -2,8 +2,8 @@
 
 use GuzzleHttp\Client;
 use Zipkin\Propagation\DefaultSamplingFlags;
-use Zipkin\Propagation\Map;
 use Zipkin\Timestamp;
+use Zipkin\Instrumentation\Http\Client\Client as ZipkinClient;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/functions.php';
@@ -21,30 +21,22 @@ $span->start(Timestamp\now());
 $span->setName('parse_request');
 $span->setKind(Zipkin\Kind\SERVER);
 
+// We need to open a scope so the http client can retrieve the current
+// context from it.
+$scopeCloser = $tracer->openScope($span);
+
 usleep(100 * mt_rand(1, 3));
 
-/* Creates the span for getting the users list */
-$childSpan = $tracer->newChild($span->getContext());
-$childSpan->start();
-$childSpan->setKind(Zipkin\Kind\CLIENT);
-$childSpan->setName('users:get_list');
+$httpClient = new ZipkinClient(new Client, $tracing);
+$request = new \GuzzleHttp\Psr7\Request('POST', 'localhost:9000');
+$response = $httpClient->sendRequest($request);
 
-$headers = [];
+echo $response->getBody();
 
-/* Injects the context into the wire */
-$injector = $tracing->getPropagation()->getInjector(new Map());
-$injector($childSpan->getContext(), $headers);
-
-/* HTTP Request to the backend */
-$httpClient = new Client();
-$request = new \GuzzleHttp\Psr7\Request('POST', 'localhost:9000', $headers);
-$childSpan->annotate('request_started', Timestamp\now());
-$response = $httpClient->send($request);
-$childSpan->annotate('request_finished', Timestamp\now());
-
-$childSpan->finish();
+usleep(100 * mt_rand(1, 3));
 
 $span->finish();
+$scopeCloser();
 
 /* Sends the trace to zipkin once the response is served */
 
