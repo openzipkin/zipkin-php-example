@@ -1,12 +1,13 @@
 {
     "name": "openzipkin/zipkin-php-example",
+    "description": "Example of two services collaborating in a request",
     "require": {
         "monolog/monolog": "^1.23",
         "guzzlehttp/guzzle": "^6.3",
-        "openzipkin/zipkin": "^1.2.2",
+        "openzipkin/zipkin": "^1.2.2|^2.0",
         "symfony/http-foundation": "3.4.x-dev"
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "authors": [
         {
             "name": "José Carlos Chávez",
