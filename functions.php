@@ -1,12 +1,12 @@
 <?php
 
-use Zipkin\Endpoint;
-use Zipkin\Samplers\BinarySampler;
 use Zipkin\TracingBuilder;
+use Zipkin\Samplers\BinarySampler;
+use Zipkin\Endpoint;
 
 /**
  * create_tracing function is a handy function that allows you to create a tracing
- * component by just passing the local service information. If you need to pass a 
+ * component by just passing the local service information. If you need to pass a
  * custom zipkin server URL use the HTTP_REPORTER_URL env var.
  */
 function create_tracing($localServiceName, $localServiceIPv4, $localServicePort = null)
@@ -24,10 +24,7 @@ function create_tracing($localServiceName, $localServiceIPv4, $localServicePort 
     $logger = new \Monolog\Logger('log');
     $logger->pushHandler(new \Monolog\Handler\ErrorLogHandler());
 
-    $reporter = new Zipkin\Reporters\Http(
-        \Zipkin\Reporters\Http\CurlFactory::create(),
-        ['endpoint_url' => $httpReporterURL]
-    );
+    $reporter = new Zipkin\Reporters\Http(['endpoint_url' => $httpReporterURL]);
     $sampler = BinarySampler::createAsAlwaysSample();
     $tracing = TracingBuilder::create()
         ->havingLocalEndpoint($endpoint)
