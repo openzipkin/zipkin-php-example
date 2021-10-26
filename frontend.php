@@ -1,9 +1,9 @@
 <?php
 
-use GuzzleHttp\Client;
-use Zipkin\Propagation\DefaultSamplingFlags;
-use Zipkin\Propagation\Map;
 use Zipkin\Timestamp;
+use Zipkin\Propagation\Map;
+use Zipkin\Propagation\DefaultSamplingFlags;
+use GuzzleHttp\Client;
 
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/functions.php';
