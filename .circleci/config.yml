@@ -63,5 +63,5 @@ workflows:
       - e2e:
           matrix:
             parameters:
-              php-version: ["7.4", "8.0", "8.1"]
+              php-version: ["7.4", "8.0"]
               zipkin-php-version: ["3.0.0-rc.1"]
