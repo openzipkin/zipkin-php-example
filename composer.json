@@ -4,7 +4,7 @@
     "require": {
         "monolog/monolog": "^1.23",
         "guzzlehttp/guzzle": "^7.2",
-        "openzipkin/zipkin": "3.0.0-rc.1",
+        "openzipkin/zipkin": "3.0.0",
         "symfony/http-foundation": "3.4.x-dev"
     },
     "minimum-stability": "beta",
