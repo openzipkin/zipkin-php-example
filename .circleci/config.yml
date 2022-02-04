@@ -9,7 +9,7 @@ jobs:
         type: string
     docker:
       # node-browsers come with java pre-installed
-      - image: circleci/php:<< parameters.php-version >>-node-browsers
+      - image: cimg/php:<< parameters.php-version >>-browsers
         auth:
           username: $DOCKERHUB_USER
           password: $DOCKERHUB_PASSWORD
