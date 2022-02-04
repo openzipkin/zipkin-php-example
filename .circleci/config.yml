@@ -9,7 +9,10 @@ jobs:
         type: string
     docker:
       # node-browsers come with java pre-installed
-      - image: circleci/php:<< parameters.php-version >>-node-browsers
+      - image: cimg/php:<< parameters.php-version >>-browsers
+        auth:
+          username: $DOCKERHUB_USER
+          password: $DOCKERHUB_PASSWORD
     working_directory: ~/zipkin-php-example
     steps:
       - checkout
@@ -54,6 +57,8 @@ workflows:
                 - master
     jobs:
       - e2e:
+          context:
+            - docker-hub-credentials
           matrix:
             parameters:
               php-version: ["7.4", "8.0", "8.1"]
@@ -61,6 +66,8 @@ workflows:
   all-tests:
     jobs:
       - e2e:
+          context:
+            - docker-hub-credentials
           matrix:
             parameters:
               php-version: ["7.4", "8.0", "8.1"]
